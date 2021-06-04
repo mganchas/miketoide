@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_marginVertical="5dp"
+    android:background="@drawable/rounded_rectangle"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/appIcon"
+        android:layout_width="@dimen/outer_big_size"
+        android:layout_height="@dimen/outer_big_size"
+        android:layout_gravity="center"
+        android:layout_marginVertical="5dp"
+        android:layout_marginStart="5dp"
+        android:contentDescription="@string/app_icon_description"
+        android:src="@drawable/ic_refresh"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseAppTint"
+        tools:srcCompat="@drawable/ic_refresh" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/appDetailsContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/appRatingContainer"
+        app:layout_constraintStart_toEndOf="@id/appIcon"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="MapCrumbs - Location keeper" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appName">
+
+            <LinearLayout
+                android:id="@+id/appVersionContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/appVersionIcon"
+                    android:layout_width="@dimen/inner_smalldium_size"
+                    android:layout_height="@dimen/inner_smalldium_size"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/app_icon_description"
+                    android:src="@drawable/ic_info"
+                    android:tint="@color/gray_medium"
+                    tools:ignore="UseAppTint" />
+
+                <TextView
+                    android:id="@+id/appVersion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/gray_dark"
+                    android:textSize="13sp"
+                    tools:text="3.1.0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/appDownloadsContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/appDownloadsIcon"
+                    android:layout_width="@dimen/inner_smalldium_size"
+                    android:layout_height="@dimen/inner_smalldium_size"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/app_icon_description"
+                    android:src="@drawable/ic_download"
+                    android:tint="@color/gray_medium"
+                    tools:ignore="UseAppTint" />
+
+                <TextView
+                    android:id="@+id/appDownloads"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/gray_dark"
+                    android:textSize="14sp"
+                    tools:text="< 100" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/appSizeContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/appSizeIcon"
+                    android:layout_width="@dimen/inner_smalldium_size"
+                    android:layout_height="@dimen/inner_smalldium_size"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/app_icon_description"
+                    android:src="@drawable/ic_box"
+                    android:tint="@color/gray_medium"
+                    tools:ignore="UseAppTint" />
+
+                <TextView
+                    android:id="@+id/appSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/gray_dark"
+                    android:textSize="14sp"
+                    tools:text="4.7 MB" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/appRatingContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/appRatingIcon"
+            android:layout_width="@dimen/inner_small_size"
+            android:layout_height="@dimen/inner_small_size"
+            android:layout_gravity="center"
+            android:layout_marginVertical="5dp"
+            android:layout_marginStart="10dp"
+            android:contentDescription="@string/app_icon_description"
+            android:src="@drawable/ic_star"
+            android:tint="@color/asphalt"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseAppTint" />
+
+        <TextView
+            android:id="@+id/appRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:layout_margin="10dp"
+            android:textColor="@color/gray_dark"
+            android:textSize="15sp"
+            tools:text="4.35" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

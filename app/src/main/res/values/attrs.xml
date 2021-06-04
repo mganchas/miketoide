@@ -4,12 +4,6 @@
         <attr name="image" format="reference" />
         <attr name="imageTint" format="color" />
 
-        <attr name="backColor" format="enum">
-            <enum name="white" value="0"/>
-            <enum name="red" value="1"/>
-            <enum name="disabled" value="2"/>
-        </attr>
-
         <attr name="size" format="enum">
             <enum name="small" value="0"/>
             <enum name="smalldium" value="1"/>

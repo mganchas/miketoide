@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <!-- labels -->
+    <string name="label_not_found">Nenhuma app encontrada</string>
+
+    <!-- alerts -->
+    <string name="alert_generic_error">Desculpe, algo de errado aconteceu. Por favor, tente novamente</string>
+</resources>

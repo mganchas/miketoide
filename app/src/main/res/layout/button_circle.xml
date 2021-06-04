@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/outer_medium_size"
+    android:layout_height="@dimen/outer_medium_size"
+    android:gravity="center"
+    android:id="@+id/buttonCircleParentLayout"
+    android:background="@drawable/button_circle_background">
+
+    <ImageView
+        android:id="@+id/buttonCircleIcon"
+        android:layout_width="@dimen/inner_medium_size"
+        android:layout_height="@dimen/inner_medium_size"
+        android:contentDescription="@string/button_circle_image_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/ic_refresh"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        tools:tint="@color/orange_light" />
+</RelativeLayout>

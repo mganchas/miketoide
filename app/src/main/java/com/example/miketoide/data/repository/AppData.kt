@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class AppData(
     @SerializedName("id")
-    val id : String,
+    val id : Long,
 
     @SerializedName("name")
     val name: String,
@@ -12,8 +12,11 @@ data class AppData(
     @SerializedName("vername")
     val version: String,
 
+    @SerializedName("size")
+    val size: Long,
+
     @SerializedName("downloads")
-    val downloads: Int,
+    val downloads: Long,
 
     @SerializedName("added")
     val launchDate: String,

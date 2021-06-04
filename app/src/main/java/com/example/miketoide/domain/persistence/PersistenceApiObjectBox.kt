@@ -2,7 +2,7 @@ package com.example.miketoide.domain.persistence
 
 import android.content.Context
 import com.example.miketoide.data.persistence.App
-import com.example.miketoide.data.MyObjectBox
+import com.example.miketoide.data.persistence.MyObjectBox
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.objectbox.Box
 import io.objectbox.BoxStore
