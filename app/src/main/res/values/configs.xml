@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="api_base_url" translatable="false">http://ws2.aptoide.com/api/6/bulkRequest/api_list/</string>
+    <integer name="cache_size">20971520</integer> // 20 MB (20 * 1024 * 1024)
+    <integer name="connection_timeout_seconds">10</integer>
+</resources>
