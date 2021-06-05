@@ -10,7 +10,7 @@ data class App(
     val id : String,
     val name: String,
     val version: String,
-    val downloads: Int,
+    val downloads: Long,
     val launchDate: String,
     val rating: Double,
     val icon: String,

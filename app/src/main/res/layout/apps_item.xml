@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    android:layout_marginVertical="5dp"
+    android:layout_margin="5dp"
     android:background="@drawable/rounded_rectangle"
     android:padding="10dp">
 
@@ -14,21 +14,20 @@
         android:layout_width="@dimen/outer_big_size"
         android:layout_height="@dimen/outer_big_size"
         android:layout_gravity="center"
-        android:layout_marginVertical="5dp"
-        android:layout_marginStart="5dp"
+        android:layout_margin="5dp"
         android:contentDescription="@string/app_icon_description"
-        android:src="@drawable/ic_refresh"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UseAppTint"
-        tools:srcCompat="@drawable/ic_refresh" />
+        tools:srcCompat="@drawable/ic_market" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/appDetailsContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginVertical="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/appRatingContainer"
@@ -41,7 +40,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="textStart"
             android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_title"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +79,7 @@
                     android:layout_marginStart="5dp"
                     android:textAlignment="textStart"
                     android:textColor="@color/gray_dark"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_descriptors"
                     tools:text="3.1.0" />
             </LinearLayout>
 
@@ -108,8 +107,8 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
                     android:textColor="@color/gray_dark"
-                    android:textSize="14sp"
-                    tools:text="< 100" />
+                    android:textSize="@dimen/text_descriptors"
+                    tools:text="100" />
             </LinearLayout>
 
             <LinearLayout
@@ -136,7 +135,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
                     android:textColor="@color/gray_dark"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_descriptors"
                     tools:text="4.7 MB" />
             </LinearLayout>
         </LinearLayout>
@@ -160,7 +159,7 @@
             android:layout_marginStart="10dp"
             android:contentDescription="@string/app_icon_description"
             android:src="@drawable/ic_star"
-            android:tint="@color/asphalt"
+            android:tint="@color/green_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -171,9 +170,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:textColor="@color/gray_dark"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_descriptors"
             tools:text="4.35" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

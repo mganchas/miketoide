@@ -3,6 +3,9 @@
 
     <!-- labels -->
     <string name="label_not_found">No apps found</string>
+    <string name="label_network_error">No internet connection</string>
+    <string name="label_top_apps">Hottest apps</string>
+    <string name="label_all_apps">All our apps</string>
 
     <!-- alert -->
     <string name="alert_generic_error">Something went wrong. Please, try again</string>

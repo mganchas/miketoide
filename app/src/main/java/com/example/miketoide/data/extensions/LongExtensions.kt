@@ -1,6 +1,6 @@
 package com.example.miketoide.data.extensions
 
-fun Long.toHumanDownloadFormat() : String {
+fun Long.toHumanDownloadedTimesFormat() : String {
     return when(this) {
         0.toLong() -> "-"
         in 1..100 -> "< 100"
@@ -10,10 +10,9 @@ fun Long.toHumanDownloadFormat() : String {
     }
 }
 
-fun Long.toHumanSizeFormat() : String {
+fun Long.toHumanDownloadSizeFormat() : String {
     return when(this) {
-        0.toLong() -> "0 kb"
-        // TODO ... logica mb
-        else -> "dasda"
+        0.toLong() -> "-"
+        else -> "${this / 1000000} MB"
     }
 }
