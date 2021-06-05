@@ -5,15 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miketoide.data.extensions.roundToOneDecimal
-import com.example.miketoide.data.extensions.toHumanDownloadSizeFormat
-import com.example.miketoide.data.extensions.toHumanDownloadedTimesFormat
 import com.example.miketoide.data.models.AppData
-import com.example.miketoide.databinding.AppsItemBinding
+import com.example.miketoide.databinding.AppsTopItemBinding
 import com.example.miketoide.domain.image.IImageApi
 import com.example.miketoide.domain.scope.ScopeApi
 import kotlinx.coroutines.launch
 
-class AllAppsListAdapter(
+class TopAppsListAdapter(
     context: Context,
     private val imageApi : IImageApi
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>()
@@ -21,14 +19,12 @@ class AllAppsListAdapter(
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var apps = mutableListOf<AppData>()
 
-    inner class AppsViewHolder(private val binding : AppsItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class AppsViewHolder(private val binding : AppsTopItemBinding) : RecyclerView.ViewHolder(binding.root)
     {
         fun bind(app: AppData)
         {
             binding.apply {
                 appName.text = app.name
-                appDownloads.text = app.downloads.toHumanDownloadedTimesFormat()
-                appSize.text = app.size.toHumanDownloadSizeFormat()
                 appRating.text = app.rating.roundToOneDecimal().toString()
                 imageApi.loadImageFromUrlIntoView(app.icon, appIcon)
             }
@@ -37,7 +33,7 @@ class AllAppsListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
     {
-        val binding = AppsItemBinding.inflate(inflater, parent, false)
+        val binding = AppsTopItemBinding.inflate(inflater, parent, false)
         return AppsViewHolder(binding)
     }
 

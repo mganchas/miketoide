@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.miketoide.data.events.BaseEvent
-import com.example.miketoide.data.mappers.EventTypesMapper
+import com.example.miketoide.data.models.AppData
 import com.example.miketoide.data.types.EventTypes
 import com.example.miketoide.databinding.ActivityMainBinding
 import com.example.miketoide.domain.alerts.IAlertApi
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity()
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var allAppsListAdapter: AllAppsListAdapter
+    private lateinit var topAppsListAdapter: TopAppsListAdapter
     private val vm by viewModels<MainViewModel>()
 
     private val eventsMapper : Map<EventTypes, (Map<String, Any>?) -> Unit> by lazy {
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity()
             EventTypes.ShowLoading to ::onShowLoading,
             EventTypes.HideLoading to ::onHideLoading,
             EventTypes.ErrorNetwork to ::onNetworkError,
-            EventTypes.ErrorGeneric to ::onAlertMessage
+            EventTypes.ErrorGeneric to ::onGenericError
         )
     }
 
@@ -64,6 +66,8 @@ class MainActivity : AppCompatActivity()
 
         setRefreshAppSearchNotFoundButton()
         setRefreshAppSearchNetworkErrorButton()
+        setAllAppsRecyclerView { setAllAppsListAdapter() }
+        setTopAppsRecyclerView { setTopAppsListAdapter() }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -121,6 +125,44 @@ class MainActivity : AppCompatActivity()
         }
     }
 
+    private fun setAllAppsListAdapter() {
+        Log.d(TAG, "setAllAppsListAdapter()")
+        allAppsListAdapter = AllAppsListAdapter(this, imageApi)
+    }
+
+    private fun setTopAppsListAdapter() {
+        Log.d(TAG, "setTopAppsListAdapter()")
+        topAppsListAdapter = TopAppsListAdapter(this, imageApi)
+    }
+
+    /*
+        Note: adding some temporal coupling (recyclerView needs the adapter set up prior to
+        its own setting)
+    */
+    private fun setAllAppsRecyclerView(preFunction : () -> Unit) {
+        Log.d(TAG, "setAllAppsRecyclerView()")
+        preFunction()
+        binding.allAppsRecyclerView.apply {
+            adapter = allAppsListAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            setHasFixedSize(true)
+        }
+    }
+
+    /*
+        Note: adding some temporal coupling (recyclerView needs the adapter set up prior to
+        its own setting)
+    */
+    private fun setTopAppsRecyclerView(preFunction : () -> Unit) {
+        Log.d(TAG, "setTopAppsRecyclerView()")
+        preFunction()
+        binding.topAppsRecyclerView.apply {
+            adapter = topAppsListAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+        }
+    }
+
     private fun registerEvents() {
         Log.d(TAG, "registerEvents()")
         eventApi.register(this)
@@ -139,10 +181,48 @@ class MainActivity : AppCompatActivity()
 
     private fun registerAllAppsObserver() {
         Log.d(TAG, "registerAllAppsObserver()")
+        vm.allApps.observe(this, {
+            Log.d(TAG, "registerAllAppsObserver().onObserve() value: $it")
+            hideNotFoundContainer()
+            hideNetworkErrorContainer()
+            showMainContainer()
+
+            when(it) {
+                null -> clearAllAppsSearch()
+                else -> updateAllAppsSearch(it)
+            }
+        })
+    }
+
+    private fun clearAllAppsSearch() {
+        Log.d(TAG, "clearAllAppsSearch()")
+        allAppsListAdapter.clearData()
+    }
+
+    private fun updateAllAppsSearch(value : List<AppData>) {
+        Log.d(TAG, "updateAllAppsSearch() value.size: ${value.size}")
+        allAppsListAdapter.setData(value)
     }
 
     private fun registerTopAppsObserver() {
         Log.d(TAG, "registerTopAppsObserver()")
+        vm.topApps.observe(this, {
+            Log.d(TAG, "registerTopAppsObserver().onObserve() value: $it")
+            when(it) {
+                null -> clearTopAppsSearch()
+                else -> updateTopAppsSearch(it)
+            }
+        })
+    }
+
+    private fun clearTopAppsSearch() {
+        Log.d(TAG, "clearTopAppsSearch()")
+        topAppsListAdapter.clearData()
+    }
+
+    private fun updateTopAppsSearch(value : List<AppData>) {
+        Log.d(TAG, "updateTopAppsSearch() value.size: ${value.size}")
+        topAppsListAdapter.setData(value)
     }
 
     private fun unregisterObservers() {
@@ -151,12 +231,14 @@ class MainActivity : AppCompatActivity()
         unregisterTopAppsObserver()
     }
 
-    private fun unregisterTopAppsObserver() {
-        Log.d(TAG, "unregisterTopAppsObserver()")
-    }
-
     private fun unregisterAllAppsObserver() {
         Log.d(TAG, "unregisterAllAppsObserver()")
+        vm.allApps.removeObservers(this)
+    }
+
+    private fun unregisterTopAppsObserver() {
+        Log.d(TAG, "unregisterTopAppsObserver()")
+        vm.topApps.removeObservers(this)
     }
 
     private fun onShowLoading(payload: Map<String, Any>?) {
@@ -180,18 +262,12 @@ class MainActivity : AppCompatActivity()
         showNetworkErrorContainer()
     }
 
-    /*
-        Note: It is true that this method centralizes every search error type and
-        could have been spread into 'N' (error specific) different methods, to handle each error type.
-        But, for simplicity of this exercise, I've put all handlers into one method.
-    */
-    private fun onAlertMessage(payload: Map<String, Any>?) {
-        Log.d(TAG, "onAlertMessage() payload: $payload")
-        if (payload == null) {
-            throw NullPointerException("payload cannot be null for search errors")
-        }
-        val message = payload[EventTypesMapper.MESSAGE]?.toString() ?: throw IndexOutOfBoundsException("key not in map")
-        showMessage(message)
+    private fun onGenericError(payload: Map<String, Any>?) {
+        Log.d(TAG, "onGenericError() payload: $payload")
+        hideMainContainer()
+        hideNetworkErrorContainer()
+        showNotFoundContainer()
+        showGenericErrorMessage()
     }
 
     private fun showGenericErrorMessage() = ScopeApi.main().launch {

@@ -2,7 +2,7 @@ package com.example.miketoide.domain.repository
 
 import android.content.Context
 import com.example.miketoide.R
-import com.example.miketoide.data.repository.AppSearch
+import com.example.miketoide.data.models.AppSearch
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -25,7 +25,7 @@ class RepositoryApiRetrofit @Inject constructor(
         val okHttpClient = OkHttpClient.Builder()
             .readTimeout(connectionTimeout, TimeUnit.SECONDS)
             .connectTimeout(connectionTimeout, TimeUnit.SECONDS)
-            .cache(cacheDetails)
+            //.cache(cacheDetails) // if there was a requirement to cache results
             .build()
 
         Retrofit.Builder()

@@ -1,4 +1,4 @@
-package com.example.miketoide.data.repository
+package com.example.miketoide.data.models
 
 import com.google.gson.annotations.SerializedName
 
@@ -7,5 +7,5 @@ data class AppSearch(
     val status : String,
 
     @SerializedName("responses")
-    val responses : ListApps
+    val responses : Responses
 )

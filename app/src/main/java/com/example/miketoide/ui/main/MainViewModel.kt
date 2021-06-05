@@ -8,16 +8,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.miketoide.R
 import com.example.miketoide.data.events.BaseEvent
-import com.example.miketoide.data.mappers.EventTypesMapper
-import com.example.miketoide.data.repository.AppData
-import com.example.miketoide.data.repository.AppSearch
+import com.example.miketoide.data.models.AppData
+import com.example.miketoide.data.models.AppSearch
 import com.example.miketoide.data.types.EventTypes
 import com.example.miketoide.domain.connectivity.ConnectivityApi
 import com.example.miketoide.domain.events.IEventApi
 import com.example.miketoide.domain.repository.IRepositoryApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
 import javax.inject.Inject
@@ -57,19 +58,24 @@ class MainViewModel @Inject constructor(
         onSearch()
     }
 
-    fun onSearch()
-    {
+    fun onSearch() = viewModelScope.launch {
         Log.d(TAG, "onSearch()")
         sendEventShowLoading()
         try {
             clearResults()
+
             val hasInternet = connectivityApi.hasInternet()
             Log.d(TAG, "onSearch() hasInternet: $hasInternet")
             if (!hasInternet) {
                 sendEventErrorNetwork()
-                return
+                return@launch
             }
 
+            val searchResults = getApps()
+            setAppSearch(searchResults)
+            setAppsCount(searchResults.responses.listApps.datasets.appsFullSet.data.total)
+            setAllApps(searchResults.responses.listApps.datasets.appsFullSet.data.apps)
+            generateRandomTopApps()
         } catch (e: Exception) {
             e.printStackTrace()
             handleExceptions(e)
@@ -95,6 +101,8 @@ class MainViewModel @Inject constructor(
         Log.d(TAG, "clearResults()")
         setAppSearch(null)
         setAppsCount(0)
+        setAllApps(null)
+        setTopApps(null)
     }
 
     private fun setAppsCount(value: Int)  {
@@ -103,8 +111,32 @@ class MainViewModel @Inject constructor(
     }
 
     private fun setAppSearch(value: AppSearch?)  {
-        Log.d(TAG, "setPokemonSearch() value: $value")
+        Log.d(TAG, "setAppSearch() value: $value")
         appSearch = value
+    }
+
+    private fun setAllApps(value: List<AppData>?)  {
+        Log.d(TAG, "setAllApps() value: $value")
+        allApps.value = value
+    }
+
+    private fun setTopApps(value: List<AppData>?)  {
+        Log.d(TAG, "setTopApps() value: $value")
+        topApps.value = value
+    }
+
+    private suspend fun getApps() : AppSearch {
+        Log.d(TAG, "getAppsSearch()")
+        return withContext(Dispatchers.IO) {
+            repositoryApi.getApps()
+        }
+    }
+
+    private fun generateRandomTopApps() {
+        Log.d(TAG, "generateRandomTopApps()")
+        val allAppsList = allApps.value ?: return
+        val topAppsList = allAppsList.sortedByDescending { it.rating }.take(5)
+        setTopApps(topAppsList)
     }
 
     private fun handleExceptions(e: Exception) {
@@ -137,10 +169,7 @@ class MainViewModel @Inject constructor(
 
     private fun sendEventErrorGeneric() {
         Log.d(TAG, "sendEventErrorGeneric()")
-        val event = BaseEvent(
-            EventTypes.ErrorGeneric,
-            mapOf(EventTypesMapper.MESSAGE to alertMessageGeneric)
-        )
+        val event = BaseEvent(EventTypes.ErrorGeneric)
         eventApi.publish(event)
     }
 

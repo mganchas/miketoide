@@ -1,4 +1,4 @@
-package com.example.miketoide.data.repository
+package com.example.miketoide.data.models
 
 import com.google.gson.annotations.SerializedName
 
@@ -21,7 +21,7 @@ data class AppData(
     @SerializedName("added")
     val launchDate: String,
 
-    @SerializedName("ratind")
+    @SerializedName("rating")
     val rating: Double,
 
     @SerializedName("icon")

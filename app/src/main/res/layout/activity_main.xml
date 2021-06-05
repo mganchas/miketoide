@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".ui.main.MainActivity"
+    android:background="@color/gray_light">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/containerMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible"
-        android:visibility="visible">
+        tools:visibility="visible">
 
         <LinearLayout
             android:id="@+id/containerTopApps"
@@ -31,16 +32,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/label_top_apps"
-                android:textColor="@color/gray_dark"
+                android:textColor="@color/black"
                 android:textSize="@dimen/text_category"
                 android:textStyle="bold" />
 
-            <HorizontalScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topAppsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp">
-                <!-- Views will be dynamically added here -->
-            </HorizontalScrollView>
+                android:layout_marginVertical="10dp"
+                android:background="@android:color/transparent"
+                tools:listitem="@layout/apps_top_item" />
         </LinearLayout>
 
         <LinearLayout
@@ -49,6 +51,7 @@
             android:layout_height="0dp"
             android:layout_margin="10dp"
             android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/containerTopApps">
 
@@ -57,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/label_all_apps"
-                android:textColor="@color/gray_dark"
+                android:textColor="@color/black"
                 android:textSize="@dimen/text_category"
                 android:textStyle="bold" />
 
@@ -65,8 +68,7 @@
                 android:id="@+id/allAppsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginVertical="10dp"
                 android:background="@android:color/transparent"
                 tools:listitem="@layout/apps_item" />
         </LinearLayout>
