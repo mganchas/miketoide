@@ -44,7 +44,7 @@ class AppSearchFragment : Fragment(R.layout.fragment_app_search)
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAppSearchBinding.inflate(inflater, container, false)
         val view = binding.root
         setAllAppsRecyclerView { setAllAppsListAdapter() }

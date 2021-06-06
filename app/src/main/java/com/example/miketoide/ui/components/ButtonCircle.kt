@@ -22,16 +22,10 @@ class ButtonCircle(context: Context, attrs: AttributeSet?) : RelativeLayout(cont
         private const val SIZE_LEVEL_BIG = 3
     }
 
-    var image: Drawable?
-        private set
-
     @ColorRes
-    var imageTint: Int = 0
-        private set
-
-    var buttonSizeLevel : Int = SIZE_LEVEL_MEDIUM
-        private set
-
+    private var imageTint: Int = 0
+    private var image: Drawable?
+    private var buttonSizeLevel : Int = SIZE_LEVEL_MEDIUM
     private var binding : ButtonCircleBinding
 
     init {

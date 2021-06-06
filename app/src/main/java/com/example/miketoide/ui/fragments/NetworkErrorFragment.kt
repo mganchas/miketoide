@@ -28,7 +28,7 @@ class NetworkErrorFragment : Fragment(R.layout.fragment_network_error)
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentNetworkErrorBinding.inflate(inflater, container, false)
         val view = binding.root
         setTryAgainButton()

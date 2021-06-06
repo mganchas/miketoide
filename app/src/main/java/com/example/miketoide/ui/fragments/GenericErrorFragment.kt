@@ -26,7 +26,7 @@ class GenericErrorFragment : Fragment(R.layout.fragment_generic_error)
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentGenericErrorBinding.inflate(inflater, container, false)
         val view = binding.root
         setTryAgainButton()
