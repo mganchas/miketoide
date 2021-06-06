@@ -15,5 +15,6 @@
     <dimen name="text_category">18sp</dimen>
     <dimen name="text_title">14sp</dimen>
     <dimen name="text_descriptors">12sp</dimen>
+    <dimen name="text_error_causes">16sp</dimen>
     <dimen name="container_top_apps_size">150dp</dimen>
 </resources>

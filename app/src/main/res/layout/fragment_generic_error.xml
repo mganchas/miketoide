@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_light">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationNotFound"
+        android:layout_width="@dimen/animation_not_found_size"
+        android:layout_height="@dimen/animation_not_found_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="animation_generic_error.json"
+        app:lottie_loop="true" />
+
+    <TextView
+        android:id="@+id/labelNotFound"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/label_generic_error"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_error_causes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/animationNotFound" />
+
+    <com.example.miketoide.ui.components.ButtonCircle
+        android:id="@+id/tryAgainButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:stateListAnimator="@null"
+        android:tooltipText="@string/tooltip_try_again"
+        app:image="@drawable/ic_refresh"
+        app:imageTint="@color/orange_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelNotFound"
+        app:size="medium" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

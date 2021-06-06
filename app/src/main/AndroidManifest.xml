@@ -15,8 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Miketoide">
         <activity
-            android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask">
+            android:name=".ui.activities.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

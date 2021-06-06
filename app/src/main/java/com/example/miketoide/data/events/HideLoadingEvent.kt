@@ -1,3 +1,3 @@
 package com.example.miketoide.data.events
 
-open class BaseEvent
+class HideLoadingEvent : BaseEvent()

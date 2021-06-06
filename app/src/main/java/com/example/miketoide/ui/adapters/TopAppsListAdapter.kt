@@ -1,4 +1,4 @@
-package com.example.miketoide.ui.main
+package com.example.miketoide.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

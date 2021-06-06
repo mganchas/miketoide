@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- labels -->
-    <string name="label_not_found">Nenhuma app encontrada</string>
+    <string name="label_generic_error">Desculpe, algo de errado aconteceu…</string>
     <string name="label_network_error">Sem conexão à internet</string>
     <string name="label_top_apps">Apps em destaque</string>
     <string name="label_all_apps">Todas as nossas apps</string>
+
+    <!-- tooltips -->
+    <string name="tooltip_try_again">Tentar novamente</string>
 
     <!-- alerts -->
     <string name="alert_generic_error">Desculpe, algo de errado aconteceu. Por favor, tente novamente</string>

@@ -2,6 +2,7 @@ package com.example.miketoide.domain.connectivity
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -16,8 +17,8 @@ class ConnectivityApi @Inject constructor(
 
     override fun hasInternet() : Boolean {
         Log.d(TAG, "hasInternet()")
-        val connMgr = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager? ?: return false
-        val activeNetworkInfo = connMgr.activeNetworkInfo
-        return activeNetworkInfo != null
+        val connMgr = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo: NetworkInfo? = connMgr.activeNetworkInfo
+        return networkInfo?.isConnected == true
     }
 }
