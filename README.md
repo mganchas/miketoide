@@ -37,8 +37,6 @@ I used Hilt for DI, so the components would access a behavior abstraction and no
 ## API access
 I used [Retrofit](https://square.github.io/retrofit/) for accessing the Apps API.
 
-**Note:** WebHook url used [here](https://webhook.site./#!/c198ff0a-488a-4238-999e-36673d6e9654/f2d5da8d-476e-4e41-b56b-71f0fe06eb1c/1).
-
 ## Image loading
 I used [Picasso](https://square.github.io/picasso/) for loading images from the Apps API and into the ImageViews.
 
